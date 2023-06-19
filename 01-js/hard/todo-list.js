@@ -12,6 +12,42 @@
 */
 
 class Todo {
+  todos = [];
+
+  add(todo) {
+    this.todos.push(todo);
+  }
+
+  remove(indexOfTodo) {
+    if (this.isInvalidIndex(indexOfTodo, this.todos)) return;
+    delete this.todos[indexOfTodo];
+    for(let i = indexOfTodo; i < this.todos.length-1; i++) {
+      this.todos[i] = this.todos[i+1]
+    }
+    this.todos.length--;
+  }
+
+  update(index, updatedTodo) {
+    if (this.isInvalidIndex(index, this.todos)) return;
+    this.todos[index] = updatedTodo;
+  }
+
+  getAll() {
+    return this.todos;
+  }
+
+  get(indexOfTodo) {
+    if (this.isInvalidIndex(indexOfTodo, this.todos)) return null;
+    return this.todos[indexOfTodo];
+  }
+
+  clear() {
+    this.todos.length = 0;
+  }
+
+  isInvalidIndex(index, arr) {
+    return index >= arr.length ? true : false;
+  }
 
 }
 
